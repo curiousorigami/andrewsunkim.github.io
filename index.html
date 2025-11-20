@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Random Funny Quote</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+    }
+    .card {
+      max-width: 700px;
+      background: #ffffff;
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .quote {
+      font-size: 1.4rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .author {
+      font-size: 1rem;
+      color: #555;
+    }
+    .date {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="quote" id="quote-text"></div>
+    <div class="author" id="quote-author"></div>
+    <div class="date" id="quote-date"></div>
+  </div>
 
+  <script>
+    const quotes = [
+      { text: "Would I rather be feared or loved? Easy. Both. I want people to be afraid of how much they love me.", author: "Michael Scott" },
+      { text: "Nobody tosses a dwarf!", author: "Gimli" },
+      { text: "Almost every night when I wake up the devil is there and wants to dispute with me… so I chase him away with a fart.", author: "Martin Luther" },
+      { text: "I ate a brownie once at a party. It was intense… Turns out there wasn’t any pot. It was just an insanely good brownie.", author: "Leslie Knope" },
+      { text: "I’m not superstitious… but I am a little stitious.", author: "Michael Scott" },
+      { text: "I am Beyoncé, always.", author: "Michael Scott" },
+      { text: "Treat yo' self.", author: "Donna Meagle" },
+      { text: "Cool cool cool cool cool.", author: "Abed Nadir" },
+      { text: "Sometimes I get emotional about spreadsheets.", author: "Jonah" },
+      { text: "I am a servant of the Secret Fire, wielder of the flame of Anor!", author: "Gandalf" },
+      { text: "Do not confuse the strange with the mystical.", author: "Data" },
+      { text: "You have no power here!", author: "Gríma Wormtongue" },
+      { text: "Never tell me the odds!", author: "Han Solo" },
+      { text: "Be regular and orderly in your life so that you may be violent and original in your work.", author: "Gustave Flaubert" },
+      { text: "I'm not arguing; I'm just explaining why I'm right.", author: "Unknown" },
+      { text: "This is not my beautiful house! This is not my beautiful wife!", author: "Talking Heads" },
+      { text: "Life is pain, highness. Anyone who says differently is selling something.", author: "The Dread Pirate Roberts" },
+      { text: "I'm not lazy. I'm on energy-saving mode.", author: "Unknown" },
+      { text: "My brain has too many tabs open.", author: "Unknown" }
+    ];
+
+    function getDayNumber() {
+      const now = new Date();
+      const start = new Date(Date.UTC(2020, 0, 1));
+      return Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    }
+
+    function getQuoteOfTheDay() {
+      const day = getDayNumber();
+      return quotes[day % quotes.length];
+    }
+
+    function renderQuote() {
+      const q = getQuoteOfTheDay();
+      document.getElementById("quote-text").textContent = "“" + q.text + "”";
+      document.getElementById("quote-author").textContent = q.author ? "— " + q.author : "";
+      document.getElementById("quote-date").textContent = new Date().toLocaleDateString(undefined, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    renderQuote();
+  </script>
+</body>
+</html>
